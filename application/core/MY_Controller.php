@@ -88,3 +88,52 @@ class Back_Controller extends MY_Controller
         redirect('sign-in?notice=' . $code);
     }
 }
+
+
+/**
+ * Contrôleur de base des pages publiques (front-office : visiteurs).
+ * Charge le concours actif et sa phase, disponibles dans toutes les vues.
+ *
+ *   class AccueilC extends Public_Controller { ... }
+ */
+class Public_Controller extends MY_Controller
+{
+    /** Statuts de concours visibles par le public (un brouillon reste caché) */
+    const STATUTS_VISIBLES = ['publie', 'cloture', 'archive'];
+
+    /** Concours actif visible publiquement, ou null */
+    protected $concoursActif;
+
+    /** Phase courante (voir ConcoursM::phase), ou null */
+    protected $phase;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('ConcoursM', 'concoursM');
+        $this->load->helper('front');
+
+        $c = $this->concoursM->get_actif();
+        if ($c && !in_array($c->statut, self::STATUTS_VISIBLES, true)) {
+            $c = null;
+        }
+
+        $this->concoursActif = $c;
+        $this->phase         = $c ? $this->concoursM->phase($c) : null;
+
+        $this->load->vars([
+            'concours'              => $c,
+            'phase'                 => $this->phase,
+            'inscriptionsOuvertes'  => $c ? $this->concoursM->inscriptions_ouvertes($c) : false,
+            'soumissionsOuvertes'   => $c ? $this->concoursM->soumissions_ouvertes($c) : false,
+        ]);
+    }
+
+    /** Affiche une page publique dans le layout du front-office */
+    protected function render($vue, array $data = [])
+    {
+        $this->load->view('front/layouts/header', $data);
+        $this->load->view($vue, $data);
+        $this->load->view('front/layouts/footer', $data);
+    }
+}

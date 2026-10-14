@@ -49,7 +49,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller']    = 'BackOfficeC';
+// ── Routes réservées ─────────────────────────────────────────────────
+$route['default_controller']   = 'AccueilC';   // ← mets ici le contrôleur de ta page d'accueil front
+$route['404_override']         = '';
+$route['translate_uri_dashes'] = FALSE;
+
+// ── Front-office (site public) ───────────────────────────────────────
+// Espace participant : connexion / inscription
+$route['connexion']   = 'Compte/connexion';
+$route['inscription'] = 'Compte/inscription';
+$route['deconnexion'] = 'Compte/deconnexion';
+$route['mon-espace']  = 'Compte/espace';
+
+// ── Back-office ──────────────────────────────────────────────────────
+$route['admin']                 = 'BackOfficeC';
 $route['sign-in']               = 'BackOfficeC/signIn';
 $route['authenticate']          = 'BackOfficeC/authenticate';
 $route['logout']                = 'BackOfficeC/logout';

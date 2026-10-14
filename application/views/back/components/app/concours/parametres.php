@@ -33,7 +33,7 @@ $badgeStatut  = ['brouillon' => 'secondary', 'publie' => 'success', 'cloture' =>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?= site_url() ?>">Accueil</a></li>
+                        <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Accueil</a></li>
                         <li class="breadcrumb-item">Concours</li>
                         <li class="breadcrumb-item active"><?= html_escape($title) ?></li>
                     </ol>
@@ -46,41 +46,41 @@ $badgeStatut  = ['brouillon' => 'secondary', 'publie' => 'success', 'cloture' =>
         <div class="container-fluid">
 
             <?php if ($msg = $this->session->flashdata('success')): ?>
-            <div class="alert alert-success alert-dismissible fade show">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <i class="icon fas fa-check"></i> <?= html_escape($msg) ?>
-            </div>
+                <div class="alert alert-success alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <i class="icon fas fa-check"></i> <?= html_escape($msg) ?>
+                </div>
             <?php endif; ?>
 
             <?php if ($msg = $this->session->flashdata('warning')): ?>
-            <div class="alert alert-warning alert-dismissible fade show">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <i class="icon fas fa-exclamation-triangle"></i> <?= html_escape($msg) ?>
-            </div>
+                <div class="alert alert-warning alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <i class="icon fas fa-exclamation-triangle"></i> <?= html_escape($msg) ?>
+                </div>
             <?php endif; ?>
 
             <?php if ($msg = $this->session->flashdata('error')): ?>
-            <div class="alert alert-danger alert-dismissible fade show">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <i class="icon fas fa-ban"></i> <?= html_escape($msg) ?>
-            </div>
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <i class="icon fas fa-ban"></i> <?= html_escape($msg) ?>
+                </div>
             <?php endif; ?>
 
             <?php if (validation_errors() || $erreur_upload): ?>
-            <div class="alert alert-danger">
-                <h5><i class="icon fas fa-exclamation-triangle"></i> Le formulaire contient des erreurs</h5>
-                <?php if ($erreur_upload): ?><p class="mb-1"><?= html_escape($erreur_upload) ?></p><?php endif; ?>
-                <?= validation_errors('<div>• ', '</div>') ?>
-            </div>
+                <div class="alert alert-danger">
+                    <h5><i class="icon fas fa-exclamation-triangle"></i> Le formulaire contient des erreurs</h5>
+                    <?php if ($erreur_upload): ?><p class="mb-1"><?= html_escape($erreur_upload) ?></p><?php endif; ?>
+                    <?= validation_errors('<div>• ', '</div>') ?>
+                </div>
             <?php endif; ?>
 
             <?php if (!$concours): ?>
-            <div class="callout callout-warning">
-                <h5><i class="fas fa-info-circle"></i> Aucun concours configuré</h5>
-                <p class="mb-0">Renseignez les informations ci-dessous pour créer le concours. Il restera en
-                    <strong>brouillon</strong> (invisible du public) tant que vous ne le publiez pas.
-                </p>
-            </div>
+                <div class="callout callout-warning">
+                    <h5><i class="fas fa-info-circle"></i> Aucun concours configuré</h5>
+                    <p class="mb-0">Renseignez les informations ci-dessous pour créer le concours. Il restera en
+                        <strong>brouillon</strong> (invisible du public) tant que vous ne le publiez pas.
+                    </p>
+                </div>
             <?php endif; ?>
 
             <?= form_open_multipart('concours-parametres/enregistrer', ['id' => 'form-parametres', 'novalidate' => 'novalidate']) ?>
@@ -169,9 +169,9 @@ $badgeStatut  = ['brouillon' => 'secondary', 'publie' => 'success', 'cloture' =>
                                             <select name="public_cible" id="public_cible"
                                                 class="form-control<?= $err('public_cible') ?>">
                                                 <?php foreach ($publics as $cle => $label): ?>
-                                                <option value="<?= $cle ?>"
-                                                    <?= $v('public_cible', 'mixte') === $cle ? 'selected' : '' ?>>
-                                                    <?= $label ?></option>
+                                                    <option value="<?= $cle ?>"
+                                                        <?= $v('public_cible', 'mixte') === $cle ? 'selected' : '' ?>>
+                                                        <?= $label ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                             <?= form_error('public_cible') ?>
@@ -182,9 +182,9 @@ $badgeStatut  = ['brouillon' => 'secondary', 'publie' => 'success', 'cloture' =>
                                             <select name="mode_validation_compte" id="mode_validation_compte"
                                                 class="form-control<?= $err('mode_validation_compte') ?>">
                                                 <?php foreach ($validations as $cle => $label): ?>
-                                                <option value="<?= $cle ?>"
-                                                    <?= $v('mode_validation_compte', 'manuelle') === $cle ? 'selected' : '' ?>>
-                                                    <?= $label ?></option>
+                                                    <option value="<?= $cle ?>"
+                                                        <?= $v('mode_validation_compte', 'manuelle') === $cle ? 'selected' : '' ?>>
+                                                        <?= $label ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                             <?= form_error('mode_validation_compte') ?>
@@ -195,13 +195,13 @@ $badgeStatut  = ['brouillon' => 'secondary', 'publie' => 'success', 'cloture' =>
                                         <label class="d-block">Mode de participation <span
                                                 class="text-danger">*</span></label>
                                         <?php foreach ($modes as $cle => $label): ?>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" class="custom-control-input js-mode"
-                                                id="mode_<?= $cle ?>" name="mode_participation" value="<?= $cle ?>"
-                                                <?= $v('mode_participation', 'les_deux') === $cle ? 'checked' : '' ?>>
-                                            <label class="custom-control-label"
-                                                for="mode_<?= $cle ?>"><?= $label ?></label>
-                                        </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input js-mode"
+                                                    id="mode_<?= $cle ?>" name="mode_participation" value="<?= $cle ?>"
+                                                    <?= $v('mode_participation', 'les_deux') === $cle ? 'checked' : '' ?>>
+                                                <label class="custom-control-label"
+                                                    for="mode_<?= $cle ?>"><?= $label ?></label>
+                                            </div>
                                         <?php endforeach; ?>
                                         <?= form_error('mode_participation') ?>
                                     </div>
@@ -236,13 +236,13 @@ $badgeStatut  = ['brouillon' => 'secondary', 'publie' => 'success', 'cloture' =>
                                         <label class="d-block">Extensions autorisées <span
                                                 class="text-danger">*</span></label>
                                         <?php foreach ($extensions as $ext): ?>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="ext_<?= $ext ?>"
-                                                name="extensions[]" value="<?= $ext ?>"
-                                                <?= in_array($ext, $extActives, true) ? 'checked' : '' ?>>
-                                            <label class="custom-control-label"
-                                                for="ext_<?= $ext ?>">.<?= $ext ?></label>
-                                        </div>
+                                            <div class="custom-control custom-checkbox custom-control-inline">
+                                                <input type="checkbox" class="custom-control-input" id="ext_<?= $ext ?>"
+                                                    name="extensions[]" value="<?= $ext ?>"
+                                                    <?= in_array($ext, $extActives, true) ? 'checked' : '' ?>>
+                                                <label class="custom-control-label"
+                                                    for="ext_<?= $ext ?>">.<?= $ext ?></label>
+                                            </div>
                                         <?php endforeach; ?>
                                         <?= form_error('extensions[]') ?>
                                     </div>
@@ -308,35 +308,35 @@ $badgeStatut  = ['brouillon' => 'secondary', 'publie' => 'success', 'cloture' =>
                                     foreach ($docs as $champ => $d):
                                         $actuel = $concours->$champ ?? null;
                                     ?>
-                                    <div class="form-group border rounded p-3">
-                                        <label><?= $d['label'] ?></label>
-                                        <?php if ($actuel): ?>
-                                        <div class="d-flex align-items-center mb-2">
-                                            <?php if ($d['image']): ?>
-                                            <img src="<?= base_url($actuel) ?>" alt="" class="img-thumbnail mr-3"
-                                                style="max-height:80px">
-                                            <?php else: ?>
-                                            <a href="<?= base_url($actuel) ?>" target="_blank"
-                                                class="btn btn-sm btn-outline-danger mr-3"><i
-                                                    class="fas fa-file-pdf"></i> Voir le document actuel</a>
+                                        <div class="form-group border rounded p-3">
+                                            <label><?= $d['label'] ?></label>
+                                            <?php if ($actuel): ?>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <?php if ($d['image']): ?>
+                                                        <img src="<?= base_url($actuel) ?>" alt="" class="img-thumbnail mr-3"
+                                                            style="max-height:80px">
+                                                    <?php else: ?>
+                                                        <a href="<?= base_url($actuel) ?>" target="_blank"
+                                                            class="btn btn-sm btn-outline-danger mr-3"><i
+                                                                class="fas fa-file-pdf"></i> Voir le document actuel</a>
+                                                    <?php endif; ?>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="supprimer_<?= $champ ?>" name="supprimer_<?= $champ ?>"
+                                                            value="1">
+                                                        <label class="custom-control-label text-danger"
+                                                            for="supprimer_<?= $champ ?>">Supprimer</label>
+                                                    </div>
+                                                </div>
                                             <?php endif; ?>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input"
-                                                    id="supprimer_<?= $champ ?>" name="supprimer_<?= $champ ?>"
-                                                    value="1">
-                                                <label class="custom-control-label text-danger"
-                                                    for="supprimer_<?= $champ ?>">Supprimer</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="<?= $champ ?>"
+                                                    name="<?= $champ ?>" accept="<?= $d['accept'] ?>">
+                                                <label class="custom-file-label"
+                                                    for="<?= $champ ?>"><?= $actuel ? 'Remplacer le fichier…' : 'Choisir un fichier…' ?></label>
                                             </div>
+                                            <small class="form-text text-muted"><?= $d['aide'] ?></small>
                                         </div>
-                                        <?php endif; ?>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="<?= $champ ?>"
-                                                name="<?= $champ ?>" accept="<?= $d['accept'] ?>">
-                                            <label class="custom-file-label"
-                                                for="<?= $champ ?>"><?= $actuel ? 'Remplacer le fichier…' : 'Choisir un fichier…' ?></label>
-                                        </div>
-                                        <small class="form-text text-muted"><?= $d['aide'] ?></small>
-                                    </div>
                                     <?php endforeach; ?>
                                 </div>
 
@@ -385,8 +385,8 @@ $badgeStatut  = ['brouillon' => 'secondary', 'publie' => 'success', 'cloture' =>
                                 <label for="statut">Statut</label>
                                 <select name="statut" id="statut" class="form-control<?= $err('statut') ?>">
                                     <?php foreach ($statuts as $cle => $label): ?>
-                                    <option value="<?= $cle ?>" <?= $statut === $cle ? 'selected' : '' ?>><?= $label ?>
-                                    </option>
+                                        <option value="<?= $cle ?>" <?= $statut === $cle ? 'selected' : '' ?>><?= $label ?>
+                                        </option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?= form_error('statut') ?>
@@ -395,15 +395,15 @@ $badgeStatut  = ['brouillon' => 'secondary', 'publie' => 'success', 'cloture' =>
                             </div>
 
                             <?php if ($concours): ?>
-                            <ul class="list-unstyled small text-muted mb-0">
-                                <li>Statut actuel : <span
-                                        class="badge badge-<?= $badgeStatut[$concours->statut] ?? 'secondary' ?>"><?= $statuts[$concours->statut] ?? '' ?></span>
-                                </li>
-                                <li>Créé le : <?= date('d/m/Y H:i', strtotime($concours->created_at)) ?></li>
-                                <?php if ($concours->updated_at): ?>
-                                <li>Modifié le : <?= date('d/m/Y H:i', strtotime($concours->updated_at)) ?></li>
-                                <?php endif; ?>
-                            </ul>
+                                <ul class="list-unstyled small text-muted mb-0">
+                                    <li>Statut actuel : <span
+                                            class="badge badge-<?= $badgeStatut[$concours->statut] ?? 'secondary' ?>"><?= $statuts[$concours->statut] ?? '' ?></span>
+                                    </li>
+                                    <li>Créé le : <?= date('d/m/Y H:i', strtotime($concours->created_at)) ?></li>
+                                    <?php if ($concours->updated_at): ?>
+                                        <li>Modifié le : <?= date('d/m/Y H:i', strtotime($concours->updated_at)) ?></li>
+                                    <?php endif; ?>
+                                </ul>
                             <?php endif; ?>
                         </div>
                         <div class="card-footer">
@@ -424,11 +424,11 @@ $badgeStatut  = ['brouillon' => 'secondary', 'publie' => 'success', 'cloture' =>
                             <p class="text-center mb-3"><strong><?= $completude['pourcentage'] ?> %</strong></p>
                             <ul class="list-unstyled mb-0">
                                 <?php foreach ($completude['items'] as $item): ?>
-                                <li class="mb-1">
-                                    <i
-                                        class="fas <?= $item['ok'] ? 'fa-check-circle text-success' : 'fa-circle text-muted' ?> mr-1"></i>
-                                    <?= $item['label'] ?>
-                                </li>
+                                    <li class="mb-1">
+                                        <i
+                                            class="fas <?= $item['ok'] ? 'fa-check-circle text-success' : 'fa-circle text-muted' ?> mr-1"></i>
+                                        <?= $item['label'] ?>
+                                    </li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
@@ -450,47 +450,47 @@ $badgeStatut  = ['brouillon' => 'secondary', 'publie' => 'success', 'cloture' =>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Bloc taille d'équipe visible uniquement si l'équipe est possible
-    var radios = document.querySelectorAll('.js-mode');
-    var blocEquipe = document.getElementById('bloc-equipe');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Bloc taille d'équipe visible uniquement si l'équipe est possible
+        var radios = document.querySelectorAll('.js-mode');
+        var blocEquipe = document.getElementById('bloc-equipe');
 
-    function majEquipe() {
-        var mode = document.querySelector('.js-mode:checked');
-        blocEquipe.style.display = (mode && mode.value === 'individuel') ? 'none' : '';
-    }
-    radios.forEach(function(r) {
-        r.addEventListener('change', majEquipe);
-    });
-    majEquipe();
-
-    // Nom du fichier choisi dans les champs custom-file
-    document.querySelectorAll('.custom-file-input').forEach(function(input) {
-        input.addEventListener('change', function() {
-            var label = input.nextElementSibling;
-            if (input.files.length) label.textContent = input.files[0].name;
-        });
-    });
-
-    // Avertissement si la taille dépasse la limite PHP
-    var taille = document.getElementById('taille_max_fichier_mo');
-    var alerte = document.getElementById('alerte-limite');
-
-    function majLimite() {
-        var limite = parseInt(taille.dataset.limitePhp, 10) || 0;
-        alerte.classList.toggle('d-none', !(limite && parseInt(taille.value, 10) > limite));
-    }
-    taille.addEventListener('input', majLimite);
-    majLimite();
-
-    // Après une erreur, ouvrir le premier onglet contenant un champ invalide
-    var invalide = document.querySelector('#form-parametres .is-invalid');
-    if (invalide) {
-        var pane = invalide.closest('.tab-pane');
-        var lien = pane && document.querySelector('a[href="#' + pane.id + '"]');
-        if (lien && window.jQuery) {
-            jQuery(lien).tab('show');
+        function majEquipe() {
+            var mode = document.querySelector('.js-mode:checked');
+            blocEquipe.style.display = (mode && mode.value === 'individuel') ? 'none' : '';
         }
-    }
-});
+        radios.forEach(function(r) {
+            r.addEventListener('change', majEquipe);
+        });
+        majEquipe();
+
+        // Nom du fichier choisi dans les champs custom-file
+        document.querySelectorAll('.custom-file-input').forEach(function(input) {
+            input.addEventListener('change', function() {
+                var label = input.nextElementSibling;
+                if (input.files.length) label.textContent = input.files[0].name;
+            });
+        });
+
+        // Avertissement si la taille dépasse la limite PHP
+        var taille = document.getElementById('taille_max_fichier_mo');
+        var alerte = document.getElementById('alerte-limite');
+
+        function majLimite() {
+            var limite = parseInt(taille.dataset.limitePhp, 10) || 0;
+            alerte.classList.toggle('d-none', !(limite && parseInt(taille.value, 10) > limite));
+        }
+        taille.addEventListener('input', majLimite);
+        majLimite();
+
+        // Après une erreur, ouvrir le premier onglet contenant un champ invalide
+        var invalide = document.querySelector('#form-parametres .is-invalid');
+        if (invalide) {
+            var pane = invalide.closest('.tab-pane');
+            var lien = pane && document.querySelector('a[href="#' + pane.id + '"]');
+            if (lien && window.jQuery) {
+                jQuery(lien).tab('show');
+            }
+        }
+    });
 </script>
